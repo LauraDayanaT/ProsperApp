@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ProsperApp - Tablero</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
+        .navbar {
+            background: #e8731a;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 { color: white; font-size: 20px; }
+        .navbar a { color: white; text-decoration: none; font-size: 14px; }
+        .container { padding: 32px; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .header h2 { color: #333; }
+        .btn-volver {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .btn-volver:hover { color: #333; }
+        .tablero {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+        }
+        .columna {
+            background: #e4e6ea;
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 250px;
+            max-width: 250px;
+        }
+        .columna-header {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        .tarjeta {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
+            color: #333;
+        }
+        .tarjeta:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .vacia {
+            color: #999;
+            font-size: 13px;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>ProsperApp</h1>
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div>
+                <a href="/proyectos" class="btn-volver">← Volver a mis proyectos</a>
+                <h2 style="margin-top:8px;">  {{ proyecto[0] }}</h2>
+            </div>
+        </div>
+
+        <div class="tablero">
+            {% for seccion, funcionalidades in tablero.items() %}
+            <div class="columna">
+                <div class="columna-header">
+                    {{ seccion[1] }}
+                </div>
+                {% if funcionalidades %}
+                    {% for f in funcionalidades %}
+                    <div class="tarjeta">
+                        🔧 {{ f[1] }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="vacia">Sin funcionalidades</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

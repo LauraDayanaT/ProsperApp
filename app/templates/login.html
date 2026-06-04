@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ProsperApp - Login</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 380px;
+        }
+        h1 { color: #e8731a; margin-bottom: 8px; }
+        p { color: #666; margin-bottom: 24px; }
+        label { font-weight: bold; display: block; margin-bottom: 6px; color: #333; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #e8731a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #cf6215; }
+        .error {
+            background: #ffe0e0;
+            color: #cc0000;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>ProsperApp</h1>
+        <p>Software para Proyectos Personales</p>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="tu@email.com" required>
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="••••••••" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </div>
+</body>
+</html>

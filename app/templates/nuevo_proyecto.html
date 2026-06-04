@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ProsperApp - Nuevo Proyecto</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
+        .navbar {
+            background: #e8731a;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 { color: white; font-size: 20px; }
+        .navbar a { color: white; text-decoration: none; font-size: 14px; }
+        .container { padding: 32px; max-width: 600px; margin: 0 auto; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        h2 { color: #333; margin-bottom: 24px; }
+        label { font-weight: bold; display: block; margin-bottom: 6px; color: #333; }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        textarea { height: 100px; resize: vertical; }
+        .secciones-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .seccion-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .seccion-option:hover { border-color: #e8731a; }
+        .seccion-option input { width: auto; margin: 0; }
+        .seccion-option label {
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
+        }
+        .btn-crear {
+            width: 100%;
+            padding: 12px;
+            background: #e8731a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn-crear:hover { background: #cf6215; }
+        .btn-volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .btn-volver:hover { color: #333; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>ProsperApp</h1>
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+    <div class="container">
+        <a href="/proyectos" class="btn-volver">← Volver a mis proyectos</a>
+        <div class="card">
+            <h2>Nuevo Proyecto</h2>
+            <form method="POST">
+                <label>Nombre del proyecto</label>
+                <input type="text" name="nombre" placeholder="Ej: App de recetas" required>
+
+                <label>Descripción</label>
+                <textarea name="descripcion" placeholder="¿De qué trata tu proyecto?"></textarea>
+
+                <label>Secciones del tablero</label>
+                <p style="color:#666; font-size:13px; margin-bottom:12px;">
+                    Selecciona mínimo 1 y máximo 6 secciones
+                </p>
+                <div class="secciones-grid">
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="backlog" id="backlog">
+                        <label for="backlog">Backlog</label>
+                    </div>
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="doing" id="doing">
+                        <label for="doing">⚙️ Doing</label>
+                    </div>
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="completed" id="completed">
+                        <label for="completed">Completed</label>
+                    </div>
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="release" id="release">
+                        <label for="release">🚀 Release</label>
+                    </div>
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="testing" id="testing">
+                        <label for="testing">Testing</label>
+                    </div>
+                    <div class="seccion-option">
+                        <input type="checkbox" name="secciones" value="review" id="review">
+                        <label for="review">👀 Review</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-crear">Crear Proyecto</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
