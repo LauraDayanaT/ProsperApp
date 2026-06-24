@@ -22,14 +22,17 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .header h2 { color: #333; }
         .btn-volver {
             color: #666;
             text-decoration: none;
             font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
         }
-        .btn-volver:hover { color: #333; }
         .tablero {
             display: flex;
             gap: 16px;
@@ -60,21 +63,63 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.1);
             font-size: 14px;
             color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .tarjeta:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        .tarjeta a {
+            color: #333;
+            text-decoration: none;
+            flex: 1;
         }
+        .tarjeta a:hover { color: #e8731a; }
+        .btn-eliminar {
+            background: none;
+            border: none;
+            color: #cc0000;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0 4px;
+        }
+        .btn-eliminar:hover { color: #ff0000; }
         .vacia {
             color: #999;
             font-size: 13px;
             text-align: center;
             padding: 20px 0;
         }
+        .form-nueva {
+            margin-top: 12px;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .form-nueva input, .form-nueva textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+        }
+        .form-nueva textarea { height: 60px; resize: none; }
+        .btn-agregar {
+            width: 100%;
+            padding: 8px;
+            background: #e8731a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .btn-agregar:hover { background: #cf6215; }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h1>ProsperApp</h1>
+        <h1>🚀 ProsperApp</h1>
         <a href="/logout">Cerrar sesión</a>
     </div>
 
@@ -82,25 +127,38 @@
         <div class="header">
             <div>
                 <a href="/proyectos" class="btn-volver">← Volver a mis proyectos</a>
-                <h2 style="margin-top:8px;">  {{ proyecto[0] }}</h2>
+                <h2>📦 {{ proyecto[0] }}</h2>
             </div>
         </div>
 
         <div class="tablero">
             {% for seccion, funcionalidades in tablero.items() %}
             <div class="columna">
-                <div class="columna-header">
-                    {{ seccion[1] }}
-                </div>
+                <div class="columna-header">{{ seccion[1] }}</div>
+
                 {% if funcionalidades %}
                     {% for f in funcionalidades %}
                     <div class="tarjeta">
-                        🔧 {{ f[1] }}
+                        <a href="/funcionalidad/{{ f[0] }}">🔧 {{ f[1] }}</a>
+                        <form method="POST" action="/funcionalidad/{{ f[0] }}/eliminar">
+                            <input type="hidden" name="id_proyecto" value="{{ id_proyecto }}">
+                            <button type="submit" class="btn-eliminar">🗑️</button>
+                        </form>
                     </div>
                     {% endfor %}
                 {% else %}
                     <div class="vacia">Sin funcionalidades</div>
                 {% endif %}
+
+                <div class="form-nueva">
+                    <form method="POST" action="/seccion/{{ seccion[0] }}/funcionalidad/nueva">
+                        <input type="hidden" name="id_proyecto" value="{{ id_proyecto }}">
+                        <input type="text" name="titulo" placeholder="Título de la funcionalidad" required>
+                        <textarea name="historia" placeholder="Historia de usuario..."></textarea>
+                        <textarea name="notas" placeholder="Notas de diseño..."></textarea>
+                        <button type="submit" class="btn-agregar">+ Agregar</button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
         </div>

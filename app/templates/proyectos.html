@@ -15,11 +15,7 @@
             align-items: center;
         }
         .navbar h1 { color: white; font-size: 20px; }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
+        .navbar a { color: white; text-decoration: none; font-size: 14px; }
         .container { padding: 16px; max-width: 900px; margin: 0 auto; }
         .header {
             display: flex;
@@ -64,6 +60,11 @@
         .activo { background: #e0f7e9; color: #2e7d32; }
         .pausado { background: #fff3e0; color: #e65100; }
         .terminado { background: #eeeeee; color: #555; }
+        .acciones {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
         .btn-ver {
             background: #333;
             color: white;
@@ -73,6 +74,16 @@
             font-size: 14px;
         }
         .btn-ver:hover { background: #555; }
+        .btn-eliminar {
+            background: #ffebee;
+            color: #cc0000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn-eliminar:hover { background: #ffcdd2; }
         .vacio {
             text-align: center;
             color: #999;
@@ -84,7 +95,7 @@
 </head>
 <body>
     <div class="navbar">
-        <h1>ProsperApp</h1>
+        <h1>🚀 ProsperApp</h1>
         <div>
             <span style="color:white; margin-right:16px;">Hola, {{ session.nombre }} 👋</span>
             <a href="/logout">Cerrar sesión</a>
@@ -105,12 +116,20 @@
                     <h3>{{ p[1] }}</h3>
                     <p>{{ p[2] }}</p>
                 </div>
-                <a href="/proyectos/{{ p[0] }}" class="btn-ver">Ver tablero →</a>
+                <div class="acciones">
+                    <a href="/proyectos/{{ p[0] }}" class="btn-ver">Ver tablero →</a>
+                    <form method="POST" action="/proyectos/{{ p[0] }}/eliminar">
+                        <button type="submit" class="btn-eliminar"
+                            onclick="return confirm('¿Segura que quieres eliminar este proyecto?')">
+                            🗑️ Eliminar
+                        </button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
         {% else %}
             <div class="vacio">
-                <p>No tienes proyectos todavía</p>
+                <p>😕 No tienes proyectos todavía</p>
                 <br>
                 <a href="/proyectos/nuevo" class="btn-nuevo">+ Crea tu primer proyecto</a>
             </div>
