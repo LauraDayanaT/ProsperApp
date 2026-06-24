@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProsperApp - Tablero</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +16,7 @@
         }
         .navbar h1 { color: white; font-size: 20px; }
         .navbar a { color: white; text-decoration: none; font-size: 14px; }
-        .container { padding: 32px; }
+        .container { padding: 16px; }
         .header {
             display: flex;
             justify-content: space-between;
@@ -34,13 +35,14 @@
             gap: 16px;
             overflow-x: auto;
             padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
         }
         .columna {
             background: #e4e6ea;
             border-radius: 12px;
             padding: 16px;
-            min-width: 250px;
-            max-width: 250px;
+            min-width: 220px;
+            max-width: 280px;
         }
         .columna-header {
             font-weight: bold;

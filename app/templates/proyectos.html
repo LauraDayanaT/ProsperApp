@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProsperApp - Mis Proyectos</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,12 +20,14 @@
             text-decoration: none;
             font-size: 14px;
         }
-        .container { padding: 32px; max-width: 900px; margin: 0 auto; }
+        .container { padding: 16px; max-width: 900px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .header h2 { color: #333; }
         .btn-nuevo {
@@ -45,6 +48,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .proyecto-info h3 { color: #333; margin-bottom: 6px; }
         .proyecto-info p { color: #666; font-size: 14px; }
