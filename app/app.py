@@ -101,6 +101,9 @@ def nuevo_proyecto():
 # -------------------------
 # Ruta 5: Eliminar proyecto
 # -------------------------
+# -------------------------
+# Ruta 5: Eliminar proyecto
+# -------------------------
 @app.route("/proyectos/<int:id_proyecto>/eliminar", methods=["POST"])
 def eliminar_proyecto(id_proyecto):
     if "id_usuario" not in session:
@@ -108,8 +111,30 @@ def eliminar_proyecto(id_proyecto):
     
     conn = get_connection()
     cur = conn.cursor()
+
+    # Primero obtenemos las secciones del proyecto
+    cur.execute("SELECT id_seccion FROM SECCION WHERE id_proyecto=%s", (id_proyecto,))
+    secciones = cur.fetchall()
+
+    for seccion in secciones:
+        # Obtenemos las funcionalidades de cada seccion
+        cur.execute("SELECT id_funcionalidad FROM FUNCIONALIDAD WHERE id_seccion=%s", (seccion[0],))
+        funcionalidades = cur.fetchall()
+
+        for func in funcionalidades:
+            # Eliminamos subtareas de cada funcionalidad
+            cur.execute("DELETE FROM SUBTAREA WHERE id_funcionalidad=%s", (func[0],))
+
+        # Eliminamos funcionalidades de la seccion
+        cur.execute("DELETE FROM FUNCIONALIDAD WHERE id_seccion=%s", (seccion[0],))
+
+    # Eliminamos las secciones del proyecto
+    cur.execute("DELETE FROM SECCION WHERE id_proyecto=%s", (id_proyecto,))
+
+    # Finalmente eliminamos el proyecto
     cur.execute("DELETE FROM PROYECTO WHERE id_proyecto=%s AND id_usuario=%s",
                 (id_proyecto, session["id_usuario"]))
+
     conn.commit()
     cur.close()
     conn.close()
