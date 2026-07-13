@@ -1,7 +1,7 @@
 INSERT INTO USUARIO (nombre, email, contraseña, fecha_registro) VALUES
 ('Laura Dayana', 'laura@email.com', '1234', '2026-01-10'),
 ('Ceir Enrique', 'enrique@email.com', '1234', '2026-01-15'),
-('Daniel Esteban', 'daniel@email.com', '1234', '2026-02-01');
+('Geraldin Nazly', 'geraldin@email.com', '1234', '2026-02-01');
 
 INSERT INTO PROYECTO (nombre, descripcion, fecha_creacion, estado, id_usuario) VALUES
 ('MoodTracker', 'App para registrar tu estado de ánimo diario con estadísticas', '2026-01-11', 'activo', 1),

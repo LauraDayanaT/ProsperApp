@@ -202,6 +202,9 @@ def nueva_funcionalidad(id_seccion):
 # -------------------------
 # Ruta 8: Eliminar funcionalidad
 # -------------------------
+# -------------------------
+# Ruta 8: Eliminar funcionalidad
+# -------------------------
 @app.route("/funcionalidad/<int:id_funcionalidad>/eliminar", methods=["POST"])
 def eliminar_funcionalidad(id_funcionalidad):
     if "id_usuario" not in session:
@@ -211,7 +214,13 @@ def eliminar_funcionalidad(id_funcionalidad):
     
     conn = get_connection()
     cur = conn.cursor()
+
+    # Primero eliminamos las subtareas de la funcionalidad
+    cur.execute("DELETE FROM SUBTAREA WHERE id_funcionalidad=%s", (id_funcionalidad,))
+
+    # Luego eliminamos la funcionalidad
     cur.execute("DELETE FROM FUNCIONALIDAD WHERE id_funcionalidad=%s", (id_funcionalidad,))
+
     conn.commit()
     cur.close()
     conn.close()
